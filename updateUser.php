@@ -7,9 +7,9 @@ try {
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   
   $new_user = array(
-    "firstname" => $_POST['createFirstName'],
-    "lastname"  => $_POST['createLastName'],
-    "email"     => $_POST['createEmail']
+    "firstname" => $_POST['updateFirstName'],
+    "lastname"  => $_POST['updateLastName'],
+    "email"     => $_POST['updateEmail']
   );
 
   $sql = sprintf(
@@ -22,7 +22,7 @@ try {
   $statement = $conn->prepare($sql);
   $statement->execute($new_user);
   header("Location: index.php");
-  echo "New record created successfully";
+  echo "Record updated successfully";
 } catch (PDOException $e) {
   header("Location: index.php");
   echo $sql . "<br>" . $e->getMessage();
