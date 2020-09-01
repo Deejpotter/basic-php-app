@@ -4,10 +4,12 @@
 
 <form method="post">
     <h2>Create</h2>
-    <label for="firstname">First Name</label>
-    <input type="text" name="firstname" id="firstname">
-    <label for="email">email address</label>
-    <input type="email" name="email" id="email">
+    <label for="createFirstName">First Name</label>
+    <input type="text" name="createFirstName" id="createFirstName">
+    <label for="createLastName">First Name</label>
+    <input type="text" name="createLastName" id="createLastName">
+    <label for="createEmail">email address</label>
+    <input type="email" name="createEmail" id="createEmail">
 </form>
 
 <form method="post">
@@ -16,10 +18,12 @@
 
 <form method="post">
     <h2>Update</h2>
-    <label for="firstname">First Name</label>
-    <input type="text" name="firstname" id="firstname">
-    <label for="email">email address</label>
-    <input type="email" name="email" id="email">
+    <label for="updateFirstName">First Name</label>
+    <input type="text" name="updateFirstName" id="updateFirstName">
+    <label for="updateLastName">First Name</label>
+    <input type="text" name="updateLastName" id="updateLastName">
+    <label for="updateEmail">email address</label>
+    <input type="email" name="updateEmail" id="updateEmail">
 </form>
 
 <form method="post">

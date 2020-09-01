@@ -3,8 +3,8 @@
 $host       = "localhost";
 $username   = "root";
 $password   = "";
-$dbname     = "basicphpapp"; // will use later
-$dsn        = "mysql:host=$host;dbname=$dbname"; // will use later
+$dbname     = "basicphpapp";
+$tableName = "users";
 $options    = array(
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
               );
