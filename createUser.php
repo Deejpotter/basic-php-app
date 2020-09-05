@@ -7,6 +7,7 @@ try {
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   
   $new_user = array(
+    "username" => $_POST['createUsername'],
     "firstname" => $_POST['createFirstName'],
     "lastname"  => $_POST['createLastName'],
     "email"     => $_POST['createEmail']

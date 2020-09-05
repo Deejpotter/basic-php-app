@@ -9,8 +9,6 @@ try {
   // use exec() because no results are returned
   $conn->exec($sql);
   echo "Database created successfully<br>";
-  header("Location: index.php");
 } catch(PDOException $e) {
   echo $sql . "<br>" . $e->getMessage();
-  header("Location: index.php");
 }
