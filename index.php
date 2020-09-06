@@ -4,15 +4,57 @@
 <section id="hero-section">
     <div class="jumbotron jumbotron-fluid">
         <div class="container text-center">
-            <h1 class="display-3">Simple Database App</h1>
-            <p>Click below to create database and table before the app will work</p>
-            <form action="init.php" method="post">
-                <input class="btn btn-primary" type="submit" value="Initialise database">
+            <h1 class="display-3">Favourite colour checker</h1>
+            <hr>
+            <p>Enter the name of a colour below to find other people who like the same one.</p>
+            <!-- Input favourite colour name and return a list of data entries that match the colour -->
+            <form class="form-inline" action="readUser.php">
+                <div class="form-group w-100 justify-content-center">
+                    <input type="text" name="readFavouriteColour" id="readFavouriteColour" class="form-control w-50" placeholder="Enter colour name...">
+                    <input class="btn btn-primary" type="submit" value="Find colour">
+                </div>
             </form>
         </div>
     </div>
 </section>
 
+
+<!-- Read section -->
+<section id="read-section" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                <h2>Find user</h2>
+                <table class="table table-striped table-inverse table-responsive">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Favourite Colour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row">1</td>
+                            <td>Sterogrules</td>
+                            <td>Sterog</td>
+                            <td>Smithson</td>
+                            <td>Blue</td>
+                        </tr>
+                        <tr>
+                            <td scope="row">2</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</section>
+
+<hr>
 
 <!-- Create section -->
 <section id="create-section" class="py-5">
@@ -38,6 +80,10 @@
                         <input type="text" name="createLastName" id="createLastName" class="form-control" placeholder="Smithson" aria-labelledby="createLastNameLabel">
                     </div>
                     <div class="form-group">
+                        <label id="createFavouriteColourLabel" for="createFavouriteColour">Favourite colour:</label>
+                        <input type="text" name="createFavouriteColour" id="createFavouriteColour" class="form-control" placeholder="Blue" aria-labelledby="createFavouriteColourLabel">
+                    </div>
+                    <div class="form-group">
                         <label id="createPasswordLabel" for="createPassword">Password:</label>
                         <input type="password" name="createPassword" id="createPassword" class="form-control" placeholder="x6h27YT5&" aria-labelledby="createPasswordLabel">
                     </div>
@@ -50,35 +96,10 @@
 
 <hr>
 
-<!-- Read section -->
-<section id="read-section" class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md">
-                <form action="readUser.php">
-                    <div class="form-group">
-                        <label id="readUsernameLabel" for="readUsername">Username:</label>
-                        <input type="text" name="readUsername" id="readUsername" class="form-control" placeholder="Sterogrules" aria-labelledby="readUsernameLabel">
-                    </div>
-                    <input class="btn btn-primary" type="submit" value="Create user">
-                </form>
-            </div>
-            <div class="col-md">
-                <h2>Find user</h2>
-
-            </div>
-        </div>
-</section>
-
-<hr>
-
 <!-- Update section -->
 <section id="update-section" class="py-5">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <h2>Update</h2>
-            </div>
             <div class="col-md-6">
                 <form class="" action="updateUser.php" method="post">
                     <div class="form-group">
@@ -96,6 +117,9 @@
                     <input class="btn btn-primary" type="submit" value="Update user">
                 </form>
             </div>
+            <div class="col-md-6">
+                <h2>Update</h2>
+            </div>
         </div>
     </div>
 </section>
@@ -107,14 +131,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md">
+                <h2>Delete user</h2>
+            </div>
+            <div class="col-md">
                 <div class="form-group">
                     <label id="deleteUsernameLabel" for="deleteUsername">Username:</label>
                     <input type="text" name="deleteUsername" id="deleteUsername" class="form-control" placeholder="Sterogrules" aria-labelledby="deleteUsernameLabel">
                 </div>
                 <input class="btn btn-primary" type="submit" value="delete user">
-            </div>
-            <div class="col-md">
-                <h2>Delete user</h2>
             </div>
         </div>
     </div>
