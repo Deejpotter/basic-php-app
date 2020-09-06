@@ -10,6 +10,7 @@ try {
     "username" => $_POST['createUsername'],
     "firstname" => $_POST['createFirstName'],
     "lastname"  => $_POST['createLastName'],
+    "favouriteColour"  => $_POST['createFavouriteColour'],
     "password" => $_POST['createPassword']
   );
 

@@ -8,7 +8,7 @@
             <hr>
             <p>Enter the name of a colour below to find other people who like the same one.</p>
             <!-- Input favourite colour name and return a list of data entries that match the colour -->
-            <form class="form-inline" action="readUser.php">
+            <form class="form-inline" action="index.php" method="post">
                 <div class="form-group w-100 justify-content-center">
                     <input type="text" name="readFavouriteColour" id="readFavouriteColour" class="form-control w-50" placeholder="Enter colour name...">
                     <input class="btn btn-primary" type="submit" value="Find colour">
@@ -24,34 +24,62 @@
     <div class="container">
         <div class="row">
             <div class="col-md">
-                <h2>Find user</h2>
-                <table class="table table-striped table-inverse table-responsive">
-                    <thead class="thead-inverse">
-                        <tr>
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Favourite Colour</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row">1</td>
-                            <td>Sterogrules</td>
-                            <td>Sterog</td>
-                            <td>Smithson</td>
-                            <td>Blue</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">2</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h2>Results</h2>
+                <?php
+                if (isset($_POST['submit'])) {
+                    echo "<p>Submitted</p>";
+                    try {
+                        require "../config.php";
+                        require "../common.php";
+
+                        $connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                        // set the PDO error mode to exception
+                        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                        $sql = "SELECT *
+                                FROM users
+                                WHERE favouriteColour = :favouriteColour";
+
+                        $favouriteColour = $_POST['readFavouriteColour'];
+
+                        $statement = $connection->prepare($sql);
+                        $statement->bindParam(':favouriteColour', $favouriteColour, PDO::PARAM_STR);
+                        $statement->execute();
+
+                        $result = $statement->fetchAll();
+                    } catch (PDOException $error) {
+                        echo $sql . "<br>" . $error->getMessage();
+                    }
+                    if ($result && $statement->rowCount() > 0) { ?>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Favourite Colour</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Input new row for each row found in database -->
+                                <?php foreach ($result as $row) { ?>
+                                    <tr>
+                                        <td scope="row"><?php echo escape($row["id"]); ?></td>
+                                        <td><?php echo escape($row["firstname"]); ?></td>
+                                        <td><?php echo escape($row["lastname"]); ?></td>
+                                        <td><?php echo escape($row["favouriteColour"]); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    <?php } else { ?>
+                        <p>No results found</p>
+                <?php }
+                } ?>
             </div>
         </div>
+    </div>
 </section>
 
 <hr>

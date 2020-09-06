@@ -14,6 +14,7 @@ try {
     username VARCHAR(30) UNIQUE NOT NULL,
     firstname VARCHAR(30) NOT NULL,
     lastname VARCHAR(30) NOT NULL,
+    favouriteColour VARCHAR(30) NOT NULL,
     password VARCHAR(50) NOT NULL,
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
     )";
