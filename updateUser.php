@@ -7,22 +7,24 @@ try {
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   
   $new_user = array(
+    "username" => $_POST['updateUsername'],
     "firstname" => $_POST['updateFirstName'],
     "lastname"  => $_POST['updateLastName'],
-    "email"     => $_POST['updateEmail']
+    "password" => $_POST['updatePassword'],
+    "favouriteColour" => $_POST['updateFavouriteColour']
   );
 
-  $sql = sprintf(
-    "INSERT INTO %s (%s) values (%s)",
-    "$tableName",
-    implode(", ", array_keys($new_user)),
-    ":" . implode(", :", array_keys($new_user))
-  );
+  
+  $sql = "UPDATE users
+            SET firstname = :firstname,
+              lastname = :lastname,
+              favouriteColour = :favouriteColour
+            WHERE username = :username";
 
   $statement = $conn->prepare($sql);
   $statement->execute($new_user);
   header("Location: index.php");
-  echo "Record updated successfully";
+  
 } catch (PDOException $e) {
   header("Location: index.php");
   echo $sql . "<br>" . $e->getMessage();

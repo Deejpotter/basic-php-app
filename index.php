@@ -11,7 +11,7 @@
             <form class="form-inline" action="index.php" method="post">
                 <div class="form-group w-100 justify-content-center">
                     <input type="text" name="readFavouriteColour" id="readFavouriteColour" class="form-control w-50" placeholder="Enter colour name...">
-                    <input class="btn btn-primary" type="submit" value="Find colour">
+                    <input class="btn btn-primary" type="submit" name="readSubmit" value="Find colour">
                 </div>
             </form>
         </div>
@@ -26,15 +26,14 @@
             <div class="col-md">
                 <h2>Results</h2>
                 <?php
-                if (isset($_POST['submit'])) {
-                    echo "<p>Submitted</p>";
+                if (isset($_POST['readSubmit'])) {
                     try {
-                        require "../config.php";
-                        require "../common.php";
+                        require "config.php";
+                        require "common.php";
 
-                        $connection = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+                        $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
                         // set the PDO error mode to exception
-                        $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                         $sql = "SELECT *
                                 FROM users
@@ -42,7 +41,7 @@
 
                         $favouriteColour = $_POST['readFavouriteColour'];
 
-                        $statement = $connection->prepare($sql);
+                        $statement = $conn->prepare($sql);
                         $statement->bindParam(':favouriteColour', $favouriteColour, PDO::PARAM_STR);
                         $statement->execute();
 
@@ -66,6 +65,7 @@
                                 <?php foreach ($result as $row) { ?>
                                     <tr>
                                         <td scope="row"><?php echo escape($row["id"]); ?></td>
+                                        <td><?php echo escape($row["username"]); ?></td>
                                         <td><?php echo escape($row["firstname"]); ?></td>
                                         <td><?php echo escape($row["lastname"]); ?></td>
                                         <td><?php echo escape($row["favouriteColour"]); ?></td>
@@ -100,11 +100,11 @@
                         <input type="text" name="createUsername" id="createUsername" class="form-control" placeholder="Sterogrules" aria-labelledby="createUsernameLabel">
                     </div>
                     <div class="form-group">
-                        <label id="createFirstNameLabel" for="createFirstName">FirstName:</label>
+                        <label id="createFirstNameLabel" for="createFirstName">First Name:</label>
                         <input type="text" name="createFirstName" id="createFirstName" class="form-control" placeholder="Sterog" aria-labelledby="createFirstNameLabel">
                     </div>
                     <div class="form-group">
-                        <label id="createLastNameLabel" for="createLastName">LastName:</label>
+                        <label id="createLastNameLabel" for="createLastName">Last Name:</label>
                         <input type="text" name="createLastName" id="createLastName" class="form-control" placeholder="Smithson" aria-labelledby="createLastNameLabel">
                     </div>
                     <div class="form-group">
@@ -115,7 +115,7 @@
                         <label id="createPasswordLabel" for="createPassword">Password:</label>
                         <input type="password" name="createPassword" id="createPassword" class="form-control" placeholder="x6h27YT5&" aria-labelledby="createPasswordLabel">
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Create user">
+                    <input class="btn btn-primary" type="submit" name="createSubmit" value="Create user">
                 </form>
             </div>
         </div>
@@ -129,24 +129,33 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
+                <h2>Update</h2>
+                <p>Fill in all of the fields here to update your information.</p>
+            </div>
+            <div class="col-md-6">
                 <form class="" action="updateUser.php" method="post">
                     <div class="form-group">
-                        <label id="updateUsernameLabel" for="updateUsername">Username:</label>
+                        <label id="updateUsernameLabel" for="updateUsername">New Username:</label>
                         <input type="text" name="updateUsername" id="updateUsername" class="form-control" placeholder="Sterogrules" aria-labelledby="updateUsernameLabel">
                     </div>
                     <div class="form-group">
-                        <label id="updateFirstNameLabel" for="updateFirstName">FirstName:</label>
+                        <label id="updateFirstNameLabel" for="updateFirstName">New First Name:</label>
                         <input type="text" name="updateFirstName" id="updateFirstName" class="form-control" placeholder="Sterog" aria-labelledby="updateFirstNameLabel">
                     </div>
                     <div class="form-group">
-                        <label id="updateLastNameLabel" for="updateLastName">LastName:</label>
+                        <label id="updateLastNameLabel" for="updateLastName">New Last Name:</label>
                         <input type="text" name="updateLastName" id="updateLastName" class="form-control" placeholder="Smithson" aria-labelledby="updateLastNameLabel">
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Update user">
+                    <div class="form-group">
+                        <label id="updateFavouriteColourLabel" for="updateFavouriteColour">New Favourite colour:</label>
+                        <input type="text" name="updateFavouriteColour" id="updateFavouriteColour" class="form-control" placeholder="Blue" aria-labelledby="updateFavouriteColourLabel">
+                    </div>
+                    <div class="form-group">
+                        <label id="updatePasswordLabel" for="updatePassword">New Password:</label>
+                        <input type="password" name="updatePassword" id="updatePassword" class="form-control" placeholder="x6h27YT5&" aria-labelledby="updatePasswordLabel">
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="updateSubmit" value="Update user">
                 </form>
-            </div>
-            <div class="col-md-6">
-                <h2>Update</h2>
             </div>
         </div>
     </div>
@@ -166,7 +175,11 @@
                     <label id="deleteUsernameLabel" for="deleteUsername">Username:</label>
                     <input type="text" name="deleteUsername" id="deleteUsername" class="form-control" placeholder="Sterogrules" aria-labelledby="deleteUsernameLabel">
                 </div>
-                <input class="btn btn-primary" type="submit" value="delete user">
+                <div class="form-group">
+                    <label id="deletePasswordLabel" for="deletePassword">Password:</label>
+                    <input type="password" name="deletePassword" id="deletePassword" class="form-control" placeholder="x6h27YT5&" aria-labelledby="deletePasswordLabel">
+                </div>
+                <input class="btn btn-primary" type="deleteSubmit" value="delete user">
             </div>
         </div>
     </div>
