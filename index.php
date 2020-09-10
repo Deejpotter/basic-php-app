@@ -90,7 +90,7 @@
         <div class="row">
             <div class="col-md">
                 <h2>Create</h2>
-                <p>Enter your info to create a new user. All fields are required.</p>
+                <p>Enter your info to create a new user. All fields are required. All of the information will be stored in a database only accessable by me and will not be used for any reason other than showing your favourite colour.</p>
             </div>
             <div class="col-md">
                 <!-- Form should submit the details and create a new user in the database -->
