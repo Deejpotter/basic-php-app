@@ -90,7 +90,7 @@
         <div class="row">
             <div class="col-md">
                 <h2>Create</h2>
-                <p>Enter your info to create a new user.</p>
+                <p>Enter your info to create a new user. All fields are required.</p>
             </div>
             <div class="col-md">
                 <!-- Form should submit the details and create a new user in the database -->
@@ -108,7 +108,7 @@
                         <input type="text" name="createLastName" id="createLastName" class="form-control" placeholder="Smithson" aria-labelledby="createLastNameLabel">
                     </div>
                     <div class="form-group">
-                        <label id="createFavouriteColourLabel" for="createFavouriteColour">Favourite colour:</label>
+                        <label id="createFavouriteColourLabel" for="createFavouriteColour">Favourite Colour:</label>
                         <input type="text" name="createFavouriteColour" id="createFavouriteColour" class="form-control" placeholder="Blue" aria-labelledby="createFavouriteColourLabel">
                     </div>
                     <div class="form-group">
@@ -130,10 +130,11 @@
         <div class="row">
             <div class="col-md-6">
                 <h2>Update</h2>
-                <p>Fill in all of the fields here to update your information.</p>
+                <p>Fill in all of the fields here to update your information. Please fill in all of the fields, any empty parts will replace that field with a blank space.</p>
             </div>
             <div class="col-md-6">
                 <form class="" action="updateUser.php" method="post">
+                    <!-- Form should find row with the username and check the password then update all fields -->
                     <div class="form-group">
                         <label id="updateUsernameLabel" for="updateUsername">New Username:</label>
                         <input type="text" name="updateUsername" id="updateUsername" class="form-control" placeholder="Sterogrules" aria-labelledby="updateUsernameLabel">
@@ -147,7 +148,7 @@
                         <input type="text" name="updateLastName" id="updateLastName" class="form-control" placeholder="Smithson" aria-labelledby="updateLastNameLabel">
                     </div>
                     <div class="form-group">
-                        <label id="updateFavouriteColourLabel" for="updateFavouriteColour">New Favourite colour:</label>
+                        <label id="updateFavouriteColourLabel" for="updateFavouriteColour">New Favourite Colour:</label>
                         <input type="text" name="updateFavouriteColour" id="updateFavouriteColour" class="form-control" placeholder="Blue" aria-labelledby="updateFavouriteColourLabel">
                     </div>
                     <div class="form-group">
@@ -169,17 +170,21 @@
         <div class="row">
             <div class="col-md">
                 <h2>Delete user</h2>
+                <p>Enter your username and password to delete your entry from the database. This is permenent.</p>
             </div>
             <div class="col-md">
-                <div class="form-group">
-                    <label id="deleteUsernameLabel" for="deleteUsername">Username:</label>
-                    <input type="text" name="deleteUsername" id="deleteUsername" class="form-control" placeholder="Sterogrules" aria-labelledby="deleteUsernameLabel">
-                </div>
-                <div class="form-group">
-                    <label id="deletePasswordLabel" for="deletePassword">Password:</label>
-                    <input type="password" name="deletePassword" id="deletePassword" class="form-control" placeholder="x6h27YT5&" aria-labelledby="deletePasswordLabel">
-                </div>
-                <input class="btn btn-primary" type="deleteSubmit" value="delete user">
+                <form action="deleteUser.php" method="post">
+                    <!-- Form should find row with the username and check the password then delete all fields -->
+                    <div class="form-group">
+                        <label id="deleteUsernameLabel" for="deleteUsername">Username:</label>
+                        <input type="text" name="deleteUsername" id="deleteUsername" class="form-control" placeholder="Sterogrules" aria-labelledby="deleteUsernameLabel">
+                    </div>
+                    <div class="form-group">
+                        <label id="deletePasswordLabel" for="deletePassword">Password:</label>
+                        <input type="password" name="deletePassword" id="deletePassword" class="form-control" placeholder="x6h27YT5&" aria-labelledby="deletePasswordLabel">
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="deleteSubmit" value="Delete user">
+                </form>
             </div>
         </div>
     </div>

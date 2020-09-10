@@ -1,3 +1,5 @@
+<!-- Call by navigating to this script in the browser -->
+
 <?php
 require "config.php";
 
